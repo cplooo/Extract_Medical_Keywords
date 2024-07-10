@@ -56,15 +56,15 @@ def download_mesh_data():
             response.raise_for_status()  # 確保請求成功
 
             # 將文件寫入本地文件系統
-            with open(file_path, 'wb') as file:
-                file.write(response.content)
+            # with open(file_path, 'wb') as file:
+                # file.write(response.content)
             st.write("下載完成")
 
             # 檢查文件內容是否正確
             with open(file_path, 'r', encoding='utf-8') as file:
                 first_lines = ''.join([file.readline() for _ in range(10)])
-                st.write("文件頭部內容:")
-                st.text(first_lines)
+                # st.write("文件頭部內容:")
+                # st.text(first_lines)
 
         except requests.exceptions.RequestException as e:
             st.error(f"下載MeSH文件時發生錯誤: {e}")
