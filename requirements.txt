@@ -1,0 +1,13 @@
+
+
+numpy
+streamlit
+streamlit_webrtc
+streamlit-nested-layout
+matplotlib
+openpyxl
+plotly
+pdfplumber
+nltk
+scikit-learn
+biopython
