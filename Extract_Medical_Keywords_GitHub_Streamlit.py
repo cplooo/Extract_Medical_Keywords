@@ -125,7 +125,7 @@ if uploaded_files:
     processed_texts = [preprocess_text(text) for text in texts]
     
     # 使用TfidfVectorizer來計算TF-IDF值
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(ngram_range=(1, 3))
     tfidf_matrix = vectorizer.fit_transform(processed_texts)
     
     # 取得特徵名稱（關鍵字）
