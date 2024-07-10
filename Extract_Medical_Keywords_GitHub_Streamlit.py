@@ -61,8 +61,8 @@ def download_mesh_data():
             st.write("下載完成")
 
             # 檢查文件內容是否正確
-            with open(file_path, 'r', encoding='utf-8') as file:
-                first_lines = ''.join([file.readline() for _ in range(10)])
+            # with open(file_path, 'r', encoding='utf-8') as file:
+            #     first_lines = ''.join([file.readline() for _ in range(10)])
                 # st.write("文件頭部內容:")
                 # st.text(first_lines)
 
