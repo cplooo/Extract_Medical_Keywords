@@ -17,8 +17,13 @@ import requests
 import os
 
 # 確認是否已經下載所需的NLTK資源，否則進行下載
-nltk.download('punkt')
-nltk.download('stopwords')
+@st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
+def load_punkt_stopwords():
+    nltk.download('punkt')
+    nltk.download('stopwords')
+
+load_punkt_stopwords()
+
 
 def preprocess_text(text):
     # 將文本轉換為小寫
@@ -44,6 +49,8 @@ def extract_text_from_pdf(file):
             text += page.extract_text()
     return text
 
+
+@st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def download_mesh_data():
     # url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2023.xml"
     url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2024.xml"
@@ -72,6 +79,8 @@ def download_mesh_data():
     
     return file_path
 
+
+@st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def load_mesh_terms(file_path):
     if file_path and os.path.exists(file_path):
         try:
