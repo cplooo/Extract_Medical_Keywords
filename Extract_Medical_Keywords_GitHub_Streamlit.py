@@ -179,7 +179,7 @@ if uploaded_files:
 
 
 
-            # 條狀圖：依關鍵字出現次數排序 (Top 20)
+            ## 條狀圖：依關鍵字出現次數排序 (Top 20)
             st.subheader("依關鍵字出現次數排序 (Top 20)")
             top_counts = df[["Keyword", "Count"]].drop_duplicates().sort_values("Count", ascending=False).head(20)
             fig_count = go.Figure(go.Bar(
@@ -192,9 +192,9 @@ if uploaded_files:
                 yaxis_title="Keyword",
                 height=500
             )
-            st.plotly_chart(fig_count, use_container_width=True)
+            st.plotly_chart(fig_count, use_container_width=True, key=f"{i}_count")
             
-            # 條狀圖：依 TF-IDF 分數排序 (Top 20)
+            ## 條狀圖：依 TF-IDF 分數排序 (Top 20)
             st.subheader("依 TF-IDF 分數排序 (Top 20)")
             top_tfidf = df[["Keyword", "TF-IDF"]].drop_duplicates().sort_values("TF-IDF", ascending=False).head(20)
             fig_tfidf = go.Figure(go.Bar(
@@ -207,7 +207,7 @@ if uploaded_files:
                 yaxis_title="Keyword",
                 height=500
             )
-            st.plotly_chart(fig_tfidf, use_container_width=True)
+            st.plotly_chart(fig_tfidf, use_container_width=True, key=f"{i}_tfidf")
             
             
             
@@ -217,7 +217,7 @@ if uploaded_files:
             grouped = grouped.sort_values(by=["Count", "TF-IDF"], ascending=[False, False])
             fig = px.scatter(grouped, x='Count', y='TF-IDF', text='Keyword', title='Count vs. TF-IDF')
             fig.update_traces(textposition='top center')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, key=f"{i}_scatter")
         else:
             st.info("本檔案沒有找到任何 MeSH 關鍵字")
 else:
