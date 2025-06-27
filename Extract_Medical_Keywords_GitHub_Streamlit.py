@@ -143,12 +143,12 @@ if uploaded_files:
 
 
 
-            ## 條狀圖：依關鍵字出現次數排序 (Top 20)
+            # 條狀圖：依關鍵字出現次數排序 (Top 20)
             st.subheader("依關鍵字出現次數排序 (Top 20)")
-            top_counts = df.set_index("Keyword")["Count"].head(20)  # 這裡df已經由大到小排
+            top_counts = df[["Keyword", "Count"]].drop_duplicates().sort_values("Count", ascending=False).head(20)
             fig_count = go.Figure(go.Bar(
-                x=top_counts.values[::-1],  # 顛倒順序
-                y=top_counts.index[::-1],
+                x=top_counts["Count"][::-1],  # 反轉讓最大值在上方
+                y=top_counts["Keyword"][::-1],
                 orientation='h'
             ))
             fig_count.update_layout(
@@ -156,15 +156,14 @@ if uploaded_files:
                 yaxis_title="Keyword",
                 height=500
             )
-            # 不要 update_yaxes(autorange="reversed")
             st.plotly_chart(fig_count, use_container_width=True)
             
-            ## 條狀圖：依 TF-IDF 分數排序 (Top 20)
+            # 條狀圖：依 TF-IDF 分數排序 (Top 20)
             st.subheader("依 TF-IDF 分數排序 (Top 20)")
-            top_tfidf = df.set_index("Keyword")["TF-IDF"].head(20)
+            top_tfidf = df[["Keyword", "TF-IDF"]].drop_duplicates().sort_values("TF-IDF", ascending=False).head(20)
             fig_tfidf = go.Figure(go.Bar(
-                x=top_tfidf.values[::-1],  # 顛倒順序
-                y=top_tfidf.index[::-1],
+                x=top_tfidf["TF-IDF"][::-1],  # 反轉讓最大值在上方
+                y=top_tfidf["Keyword"][::-1],
                 orientation='h'
             ))
             fig_tfidf.update_layout(
