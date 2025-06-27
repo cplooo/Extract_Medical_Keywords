@@ -46,6 +46,42 @@ def extract_text_from_pdf(file):
                 text += page_text
     return text
 
+
+
+
+# ## 直接從 National Library of Medicine 下載:
+# @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
+# def download_mesh_data():
+#     # url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2023.xml"
+#     url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2025.xml"
+           
+#     file_path = "desc2025.xml"
+#     if not os.path.exists(file_path):
+#         st.write(f"Downloading MeSH data from {url}...")
+#         try:
+#             response = requests.get(url)
+#             response.raise_for_status()  # 確保請求成功
+
+#             # 將文件寫入本地文件系統
+#             with open(file_path, 'wb') as file:
+#                 file.write(response.content)
+#             st.write("下載完成")
+
+#             # 檢查文件內容是否正確
+#             with open(file_path, 'r', encoding='utf-8') as file:
+#                 first_lines = ''.join([file.readline() for _ in range(10)])
+#                 # st.write("desc2024.xml 文件頭部內容:")
+#                 # st.text(first_lines)
+
+#         except requests.exceptions.RequestException as e:
+#             st.error(f"下載MeSH文件時發生錯誤: {e}")
+#             return None
+    
+#     return file_path
+
+
+
+## 從 dropbox下載:
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")
 def download_mesh_data():
     url = "https://www.dropbox.com/scl/fi/vx7gcihrli5kcj331psbh/desc2025.xml?rlkey=rzfb0cq34odikah9kzq8r64u2&st=kfxsy44r&dl=1"
