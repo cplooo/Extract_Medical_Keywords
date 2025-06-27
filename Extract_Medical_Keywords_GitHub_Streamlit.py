@@ -19,7 +19,7 @@ import os
 # 確認是否已經下載所需的NLTK資源，否則進行下載
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def load_punkt_stopwords():
-    nltk.download('punkt')
+    nltk.download('punkt_tab')
     nltk.download('stopwords')
 
 load_punkt_stopwords()
