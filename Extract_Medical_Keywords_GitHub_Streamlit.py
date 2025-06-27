@@ -55,7 +55,7 @@ def download_mesh_data():
     # url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2023.xml"
     url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2025.xml"
            
-    file_path = "desc2024.xml"
+    file_path = "desc2025.xml"
     if not os.path.exists(file_path):
         st.write(f"Downloading MeSH data from {url}...")
         try:
