@@ -153,15 +153,47 @@ if uploaded_files:
             mime='text/csv'
         )
 
-        # 畫圖：出現次數 Top 20
+
+
+        import plotly.graph_objects as go
+
+        # 出現次數 Top 20 條狀圖
         st.subheader("依關鍵字出現次數排序 (Top 20)")
         top_counts = df.groupby("Keyword")["Count"].sum().sort_values(ascending=False).head(20)
-        st.bar_chart(top_counts)
-
-        # 畫圖：TF-IDF Top 20
+        fig_count = go.Figure(go.Bar(
+            x=top_counts.values,
+            y=top_counts.index,
+            orientation='h'
+        ))
+        fig_count.update_layout(
+            yaxis={'categoryorder':'total ascending'},
+            xaxis_title="Count",
+            yaxis_title="Keyword",
+            height=700
+        )
+        fig_count.update_yaxes(autorange="reversed")
+        st.plotly_chart(fig_count, use_container_width=True)
+        
+        # TF-IDF Top 20 條狀圖
         st.subheader("依 TF-IDF 分數排序 (Top 20)")
         top_tfidf = df.groupby("Keyword")["TF-IDF"].sum().sort_values(ascending=False).head(20)
-        st.bar_chart(top_tfidf)
+        fig_tfidf = go.Figure(go.Bar(
+            x=top_tfidf.values,
+            y=top_tfidf.index,
+            orientation='h'
+        ))
+        fig_tfidf.update_layout(
+            yaxis={'categoryorder':'total ascending'},
+            xaxis_title="TF-IDF",
+            yaxis_title="Keyword",
+            height=700
+        )
+        fig_tfidf.update_yaxes(autorange="reversed")
+        st.plotly_chart(fig_tfidf, use_container_width=True)
+
+
+
+
 
         # 散佈圖（橫軸次數，縱軸 TF-IDF，點皆按最大排序）
         st.subheader("關鍵字出現次數 vs. TF-IDF（散佈圖）")
