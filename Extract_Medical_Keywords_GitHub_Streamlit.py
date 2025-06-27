@@ -24,7 +24,7 @@ import plotly.express as px
 
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")
 def load_punkt_stopwords():
-    nltk.download('punk_tab')
+    nltk.download('punkt_tab')
     nltk.download('stopwords')
 load_punkt_stopwords()
 
